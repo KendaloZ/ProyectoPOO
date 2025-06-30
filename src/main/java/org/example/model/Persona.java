@@ -10,7 +10,7 @@ public class Persona {
     private int telefono;
     private String direccion;
     private Date fechaNacimiento;
-    private String Genero;
+    private String genero;
 
     public Persona(int id, String nombreCompleto, String cedula, String correo, int telefono, String direccion, Date fechaNacimiento, String genero) {
         this.id = id;
@@ -20,7 +20,7 @@ public class Persona {
         this.telefono = telefono;
         this.direccion = direccion;
         this.fechaNacimiento = fechaNacimiento;
-        Genero = genero;
+        this.genero = genero;
     }
 
     public Persona(String nombreCompleto, String cedula, String correo, int telefono, String direccion, Date fechaNacimiento, String genero) {
@@ -30,7 +30,7 @@ public class Persona {
         this.telefono = telefono;
         this.direccion = direccion;
         this.fechaNacimiento = fechaNacimiento;
-        Genero = genero;
+        this.genero = genero;
     }
 
     public int getId() {
@@ -90,10 +90,16 @@ public class Persona {
     }
 
     public String getGenero() {
-        return Genero;
+        return genero;
     }
 
     public void setGenero(String genero) {
-        Genero = genero;
+        this.genero = genero;
     }
 }
+
+
+
+
+
+
