@@ -11,7 +11,7 @@ import java.util.List;
 public class ClienteDAO {
 
     public void insertarCliente(Cliente itemCliente) {
-        String sql = "INSERT INTO grupokm_cliente (nombre_completo, cedula, correo, telefono, direccion, fecha_nacimiento, genero, padecimiento) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO grupokm_cliente (nombre_completo, cedula, correo, telefono, direccion, fecha_nacimiento, genero, padecimiento) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
 
         try {
             Connection con = Conexion.getConnection();
@@ -33,7 +33,7 @@ public class ClienteDAO {
     }
 
     public void actualizarCliente(Cliente itemCliente) {
-        String sql = "UPDATE grupokm_cliente SET nombre_completo = ?, cedula = ?, correo = ?, telfono = ?, direccion = ?, fecha_nacimiento = ?, genero = ?, padecimiento WHERE id = ?";
+        String sql = "UPDATE grupokm_cliente SET nombre_completo = ?, cedula = ?, correo = ?, telefono = ?, direccion = ?, fecha_nacimiento = ?, genero = ?, padecimiento = ? WHERE id = ?";
 
         try {
             Connection con = Conexion.getConnection();

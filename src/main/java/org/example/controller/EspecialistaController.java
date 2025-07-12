@@ -5,7 +5,7 @@ import org.example.model.Especialista;
 
 import java.util.List;
 
-public class EspecialistaCrontroller {
+public class EspecialistaController {
     private EspecialistaDAO especialistaDAO = new EspecialistaDAO();
 
     public void insertarEspecialista(Especialista itemEspecialista){
