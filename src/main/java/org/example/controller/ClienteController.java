@@ -28,4 +28,8 @@ public class ClienteController {
     public Cliente obtenerCliente(int id){
         return clienteDAO.obtenerCliente(id);
     }
+
+    public void asociarMedicamentoCliente(int idCliente, int idMedicamento) {
+        clienteDAO.asociarMedicamentoCliente(idCliente, idMedicamento);
+    }
 }
