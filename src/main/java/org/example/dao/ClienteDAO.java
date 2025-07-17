@@ -135,18 +135,6 @@ public class ClienteDAO {
         return cliente;
     }
 
-    public void asociarMedicamentoCliente(int idCliente, int idMedicamento) {
-        String sql = "INSERT INTO grupokm_cliente_medicamento (id_cliente, id_medicamento) VALUES (?, ?)";
-        try {
-            Connection con = Conexion.getConnection();
-            PreparedStatement ps = con.prepareStatement(sql);{
-                ps.setInt(1, idCliente);
-                ps.setInt(2, idMedicamento);
-            }
-            ps.executeUpdate();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
-
 }
+
+
