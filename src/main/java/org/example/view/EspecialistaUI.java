@@ -119,26 +119,72 @@ public class EspecialistaUI extends JFrame {
     private void buscarEspecialista(ActionEvent e) {
         try {
             int id = Integer.parseInt(idField.getText());
-            Especialista esp = especialistaController.obtenerEspecialista(id);
-            if (esp != null) {
+            Especialista especialista = especialistaController.obtenerEspecialistaXID(id);
+
+            if (especialista == null) {
+                String cedula = cedulaField.getText();
+                if (!cedula.isEmpty()) {
+                    especialista = especialistaController.obtenerEspecialistaXCedula(cedula);
+                }
+            }
+
+            if (especialista == null) {
+                String nombre = nombreField.getText();
+                if (!nombre.isEmpty()) {
+                    especialista = especialistaController.obtenerEspecialistaXNombre(nombre);
+                }
+            }
+
+            if (especialista != null) {
                 outputArea.setText(
-                        "ID: " + esp.getId() + "\n" +
-                                "Nombre: " + esp.getNombreCompleto() + "\n" +
-                                "Cédula: " + esp.getCedula() + "\n" +
-                                "Correo: " + esp.getCorreo() + "\n" +
-                                "Teléfono: " + esp.getTelefono() + "\n" +
-                                "Dirección: " + esp.getDireccion() + "\n" +
-                                "Fecha Nacimiento: " + esp.getFechaNacimiento() + "\n" +
-                                "Género: " + esp.getGenero() + "\n" +
-                                "Especialidad: " + esp.getEspecialidad()
+                        "ID: " + especialista.getId() + "\n" +
+                                "Nombre: " + especialista.getNombreCompleto() + "\n" +
+                                "Cédula: " + especialista.getCedula() + "\n" +
+                                "Correo: " + especialista.getCorreo() + "\n" +
+                                "Teléfono: " + especialista.getTelefono() + "\n" +
+                                "Dirección: " + especialista.getDireccion() + "\n" +
+                                "Fecha Nacimiento: " + especialista.getFechaNacimiento() + "\n" +
+                                "Género: " + especialista.getGenero() + "\n" +
+                                "Especialidad: " + especialista.getEspecialidad()
                 );
             } else {
-                outputArea.setText("Especialista no encontrado con ID: " + id);
+                outputArea.setText("Especialista no encontrado con ID, cédula o nombre.");
             }
+
         } catch (NumberFormatException ex) {
-            outputArea.setText("Por favor ingrese un ID válido.");
+            String cedula = cedulaField.getText();
+            Especialista especialista = null;
+
+            if (!cedula.isEmpty()) {
+                especialista = especialistaController.obtenerEspecialistaXCedula(cedula);
+            }
+
+            if (especialista == null) {
+                String nombre = nombreField.getText();
+                if (!nombre.isEmpty()) {
+                    especialista = especialistaController.obtenerEspecialistaXNombre(nombre);
+                }
+            }
+
+            if (especialista != null) {
+                outputArea.setText(
+                        "ID: " + especialista.getId() + "\n" +
+                                "Nombre: " + especialista.getNombreCompleto() + "\n" +
+                                "Cédula: " + especialista.getCedula() + "\n" +
+                                "Correo: " + especialista.getCorreo() + "\n" +
+                                "Teléfono: " + especialista.getTelefono() + "\n" +
+                                "Dirección: " + especialista.getDireccion() + "\n" +
+                                "Fecha Nacimiento: " + especialista.getFechaNacimiento() + "\n" +
+                                "Género: " + especialista.getGenero() + "\n" +
+                                "Especialidad: " + especialista.getEspecialidad()
+                );
+            } else {
+                outputArea.setText("Especialista no encontrado con cédula o nombre.");
+            }
         }
     }
+
+
 
     private Especialista construirEspecialista(boolean incluirId) {
         int id = incluirId ? Integer.parseInt(idField.getText()) : 0;

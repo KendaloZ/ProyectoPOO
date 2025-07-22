@@ -17,4 +17,7 @@ public class MedicamentoClienteController {
     public void borrarMedicamentoCliente(int idCliente) {
         medicamentoClienteDAO.desasociarMedicamentoCliente(idCliente);
     }
+//    public void obtenerMedicamentosClientes(int idMedicamento) {
+//        medicamentoClienteDAO.obtenerMedicamentosClientes(idMedicamento);
+//    }
 }

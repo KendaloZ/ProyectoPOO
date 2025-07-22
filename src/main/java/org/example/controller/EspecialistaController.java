@@ -24,8 +24,15 @@ public class EspecialistaController {
         return especialistaDAO.obtenerEspecialistas();
     }
 
-    public Especialista obtenerEspecialista(int id){
-        return especialistaDAO.obtenerEspecialista(id);
+    public Especialista obtenerEspecialistaXID(int id){
+        return especialistaDAO.obtenerEspecialistaXID(id);
     }
-    
+
+    public Especialista obtenerEspecialistaXCedula(String cedula){
+        return especialistaDAO.obtenerEspecialistaXCedula(cedula);
+    }
+
+    public Especialista obtenerEspecialistaXNombre(String nombre){
+        return especialistaDAO.obtenerEspecialistaXNombre(nombre);
+    }
 }

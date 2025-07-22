@@ -51,25 +51,29 @@ public class MedicamentoClienteDAO {
         }
     }
 
-    //En proceso
-//    public void List<Medicamento> obtenerMedicamentosClientes(int idCliente){
+//    public List<Medicamento> obtenerMedicamentosClientes(int idCliente) {
 //        List<Medicamento> medicamentos = new ArrayList<>();
-//        String sql = "SELECT * FROM grupokm_cliente_medicamento WHERE id_cliente = ?";
-//        try {
-//            Connection con = Conexion.getConnection();
-//            Statement st = con.createStatement();
-//            ResultSet rs = st.executeQuery(sql);
-//            while (rs.next()){
-//                Medicamento items = new Medicamento(
-//                        rs.getInt("id"),
-//                        rs.getInt("id_cliente"),
-//                        rs.getInt("id_medicamento")
+//        String sql = "SELECT c.id_medicamento, m.nombre FROM grupokm_cliente_medicamento c INNER JOIN grupokm_medicamento m ON m.id_medicamento = c.id_medicamento WHERE c.id_cliente = ?";
+//
+//        try (Connection con = Conexion.getConnection();
+//             PreparedStatement ps = con.prepareStatement(sql)) {
+//
+//            ps.setInt(1, idCliente);
+//            ResultSet rs = ps.executeQuery();
+//
+//            while (rs.next()) {
+//                Medicamento medicamento = new Medicamento(
+//                        rs.getInt("id_medicamento"),
+//                        rs.getString("nombre")
 //                );
-//                Medicamento.add(items);
+//                medicamentos.add(medicamento);
 //            }
 //
 //        } catch (SQLException e) {
-//            throw new RuntimeException(e);
+//            throw new RuntimeException("Error al obtener medicamentos del cliente", e);
 //        }
+//
+//        return medicamentos;
 //    }
+
 }

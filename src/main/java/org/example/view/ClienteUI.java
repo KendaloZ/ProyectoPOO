@@ -126,7 +126,23 @@ public class ClienteUI extends JFrame {
     private void buscarCliente(ActionEvent e) {
         try {
             int id = Integer.parseInt(idField.getText());
-            Cliente cliente = clienteController.obtenerCliente(id);
+            Cliente cliente = clienteController.obtenerClienteXID(id);
+
+            if (cliente == null) {
+                // Si no se encuentra por ID, intenta buscar por cédula
+                String cedula = cedulaField.getText();
+                if (!cedula.isEmpty()) {
+                    cliente = clienteController.obtenerClienteXCedula(cedula);
+                }
+            }
+
+            if (cliente == null) {
+                String nombre = nombreField.getText();
+                if (!nombre.isEmpty()) {
+                    cliente = clienteController.obtenerClienteXNombre(nombre);
+                }
+            }
+
             if (cliente != null) {
                 outputArea.setText(
                         "ID: " + cliente.getId() + "\n" +
@@ -140,12 +156,43 @@ public class ClienteUI extends JFrame {
                                 "Padecimiento: " + cliente.getPadecimiento()
                 );
             } else {
-                outputArea.setText("Cliente no encontrado con ID: " + id);
+                outputArea.setText("Cliente no encontrado con ID, cédula o nombre.");
             }
+
         } catch (NumberFormatException ex) {
-            outputArea.setText("Por favor ingrese un ID válido.");
+            String cedula = cedulaField.getText();
+            Cliente cliente = null;
+
+            if (!cedula.isEmpty()) {
+                cliente = clienteController.obtenerClienteXCedula(cedula);
+            }
+
+            if (cliente == null) {
+                String nombre = nombreField.getText();
+                if (!nombre.isEmpty()) {
+                    cliente = clienteController.obtenerClienteXNombre(nombre);
+                }
+            }
+
+            if (cliente != null) {
+                outputArea.setText(
+                        "ID: " + cliente.getId() + "\n" +
+                                "Nombre: " + cliente.getNombreCompleto() + "\n" +
+                                "Cédula: " + cliente.getCedula() + "\n" +
+                                "Correo: " + cliente.getCorreo() + "\n" +
+                                "Teléfono: " + cliente.getTelefono() + "\n" +
+                                "Dirección: " + cliente.getDireccion() + "\n" +
+                                "Fecha Nacimiento: " + cliente.getFechaNacimiento() + "\n" +
+                                "Género: " + cliente.getGenero() + "\n" +
+                                "Padecimiento: " + cliente.getPadecimiento()
+                );
+            } else {
+                outputArea.setText("Cliente no encontrado con cédula o nombre.");
+            }
         }
     }
+
+
 
 
     private Cliente construirCliente(boolean incluirId) {

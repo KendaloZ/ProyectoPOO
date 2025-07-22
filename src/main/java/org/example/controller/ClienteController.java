@@ -25,9 +25,16 @@ public class ClienteController {
         return clienteDAO.obtenerclientes();
     }
 
-    public Cliente obtenerCliente(int id){
-        return clienteDAO.obtenerCliente(id);
+    public Cliente obtenerClienteXID(int id){
+        return clienteDAO.obtenerClienteXID(id);
     }
 
+    public Cliente obtenerClienteXCedula(String cedula){
+        return clienteDAO.obtenerClienteXCedula(cedula);
+    }
+
+    public Cliente obtenerClienteXNombre(String nombreCompleto){
+        return clienteDAO.obtenerClienteXNombre(nombreCompleto);
+    }
 
 }
