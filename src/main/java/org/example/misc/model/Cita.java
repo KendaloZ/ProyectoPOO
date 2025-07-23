@@ -13,6 +13,14 @@ public class Cita {
 
     public Cita() {}
 
+    public Cita(LocalDate fecha, LocalDateTime hora, int idCliente, int idEspecialista, String motivo) {
+        this.fecha = fecha;
+        this.hora = hora;
+        this.idCliente = idCliente;
+        this.idEspecialista = idEspecialista;
+        this.motivo = motivo;
+    }
+
     public Cita(int id, LocalDate fecha, LocalDateTime hora, int idCliente, int idEspecialista, String motivo) {
         this.id = id;
         this.fecha = fecha;

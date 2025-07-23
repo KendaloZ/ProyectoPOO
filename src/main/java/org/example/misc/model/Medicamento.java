@@ -13,6 +13,11 @@ public class Medicamento {
         this.disponible = disponible;
     }
 
+    public Medicamento(String nombre, boolean disponible) {
+        this.nombre = nombre;
+        this.disponible = disponible;
+    }
+
     // Getters y Setters
     public int getId() {
         return id;
