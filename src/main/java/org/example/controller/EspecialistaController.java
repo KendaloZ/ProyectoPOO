@@ -5,7 +5,7 @@ import org.example.model.Especialista;
 
 import java.util.List;
 
-public class EspecialistaCrontroller {
+public class EspecialistaController {
     private EspecialistaDAO especialistaDAO = new EspecialistaDAO();
 
     public void insertarEspecialista(Especialista itemEspecialista){
@@ -24,8 +24,15 @@ public class EspecialistaCrontroller {
         return especialistaDAO.obtenerEspecialistas();
     }
 
-    public Especialista obtenerEspecialista(int id){
-        return especialistaDAO.obtenerEspecialista(id);
+    public Especialista obtenerEspecialistaXID(int id){
+        return especialistaDAO.obtenerEspecialistaXID(id);
     }
-    
+
+    public Especialista obtenerEspecialistaXCedula(String cedula){
+        return especialistaDAO.obtenerEspecialistaXCedula(cedula);
+    }
+
+    public Especialista obtenerEspecialistaXNombre(String nombre){
+        return especialistaDAO.obtenerEspecialistaXNombre(nombre);
+    }
 }

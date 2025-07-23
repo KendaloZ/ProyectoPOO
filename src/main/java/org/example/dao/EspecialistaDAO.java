@@ -95,7 +95,7 @@ public class EspecialistaDAO {
         return especialistas;
     }
 
-    public Especialista obtenerEspecialista(int id) {
+    public Especialista obtenerEspecialistaXID(int id) {
         String sql = "SELECT * FROM grupokm_especialista WHERE id = ?";
         Especialista especialista = null;
 
@@ -103,6 +103,74 @@ public class EspecialistaDAO {
             Connection con = Conexion.getConnection();
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setInt(1, id);
+            ResultSet rs = ps.executeQuery();
+
+            if (rs.next()) {
+                especialista = new Especialista(
+                        rs.getInt("id"),
+                        rs.getString("nombre_completo"),
+                        rs.getString("cedula"),
+                        rs.getString("correo"),
+                        rs.getInt("telefono"),
+                        rs.getString("direccion"),
+                        rs.getDate("fecha_nacimiento"),
+                        rs.getString("genero"),
+                        rs.getString("especialidad")
+                );
+            }
+
+            rs.close();
+            ps.close();
+            con.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return especialista;
+    }
+
+    public Especialista obtenerEspecialistaXCedula(String cedula) {
+        String sql = "SELECT * FROM grupokm_especialista WHERE cedula = ?";
+        Especialista especialista = null;
+
+        try {
+            Connection con = Conexion.getConnection();
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setString(1, cedula);
+            ResultSet rs = ps.executeQuery();
+
+            if (rs.next()) {
+                especialista = new Especialista(
+                        rs.getInt("id"),
+                        rs.getString("nombre_completo"),
+                        rs.getString("cedula"),
+                        rs.getString("correo"),
+                        rs.getInt("telefono"),
+                        rs.getString("direccion"),
+                        rs.getDate("fecha_nacimiento"),
+                        rs.getString("genero"),
+                        rs.getString("especialidad")
+                );
+            }
+
+            rs.close();
+            ps.close();
+            con.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return especialista;
+    }
+
+    public Especialista obtenerEspecialistaXNombre(String nombreCompleto) {
+        String sql = "SELECT * FROM grupokm_especialista WHERE LOWER(nombre_completo) LIKE LOWER(?)";
+        Especialista especialista = null;
+
+        try {
+            Connection con = Conexion.getConnection();
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setString(1, "%" + nombreCompleto + "%");
             ResultSet rs = ps.executeQuery();
 
             if (rs.next()) {

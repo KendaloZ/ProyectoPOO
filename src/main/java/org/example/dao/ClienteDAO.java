@@ -11,7 +11,7 @@ import java.util.List;
 public class ClienteDAO {
 
     public void insertarCliente(Cliente itemCliente) {
-        String sql = "INSERT INTO grupokm_cliente (nombre_completo, cedula, correo, telefono, direccion, fecha_nacimiento, genero, padecimiento) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO grupokm_cliente (nombre_completo, cedula, correo, telefono, direccion, fecha_nacimiento, genero, padecimiento) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
 
         try {
             Connection con = Conexion.getConnection();
@@ -33,7 +33,7 @@ public class ClienteDAO {
     }
 
     public void actualizarCliente(Cliente itemCliente) {
-        String sql = "UPDATE grupokm_cliente SET nombre_completo = ?, cedula = ?, correo = ?, telfono = ?, direccion = ?, fecha_nacimiento = ?, genero = ?, padecimiento WHERE id = ?";
+        String sql = "UPDATE grupokm_cliente SET nombre_completo = ?, cedula = ?, correo = ?, telefono = ?, direccion = ?, fecha_nacimiento = ?, genero = ?, padecimiento = ? WHERE id = ?";
 
         try {
             Connection con = Conexion.getConnection();
@@ -101,7 +101,7 @@ public class ClienteDAO {
         return clientes;
     }
 
-    public Cliente obtenerCliente(int id) {
+    public Cliente obtenerClienteXID(int id) {
         String sql = "SELECT * FROM grupokm_cliente WHERE id = ?";
         Cliente cliente = null;
 
@@ -135,18 +135,72 @@ public class ClienteDAO {
         return cliente;
     }
 
-    public void asociarMedicamentoCliente(int idCliente, int idMedicamento) {
-        String sql = "INSERT INTO grupokm_cliente_medicamento (id_cliente, id_medicamento) VALUES (?, ?)";
+    public Cliente obtenerClienteXCedula(String cedula) {
+        String sql = "SELECT * FROM grupokm_cliente WHERE cedula = ?";
+        Cliente cliente = null;
+
         try {
             Connection con = Conexion.getConnection();
-            PreparedStatement ps = con.prepareStatement(sql);{
-                ps.setInt(1, idCliente);
-                ps.setInt(2, idMedicamento);
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setString(1, cedula);
+            ResultSet rs = ps.executeQuery();
+
+            if (rs.next()) {
+                cliente = new Cliente(
+                        rs.getInt("id"),
+                        rs.getString("nombre_completo"),
+                        rs.getString("cedula"),
+                        rs.getString("correo"),
+                        rs.getInt("telefono"),
+                        rs.getString("direccion"),
+                        rs.getDate("fecha_nacimiento"),
+                        rs.getString("genero"),
+                        rs.getString("padecimiento")
+                );
             }
-            ps.executeUpdate();
+
+            rs.close();
+            ps.close();
+            con.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        return cliente;
+    }
+
+    public Cliente obtenerClienteXNombre(String nombreCompleto) {
+        String sql = "SELECT * FROM grupokm_cliente WHERE LOWER(nombre_completo) LIKE LOWER(?)";
+        Cliente cliente = null;
+
+        try {
+            Connection con = Conexion.getConnection();
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setString(1, "%" + nombreCompleto + "%");
+            ResultSet rs = ps.executeQuery();
+
+            if (rs.next()) {
+                cliente = new Cliente(
+                        rs.getInt("id"),
+                        rs.getString("nombre_completo"),
+                        rs.getString("cedula"),
+                        rs.getString("correo"),
+                        rs.getInt("telefono"),
+                        rs.getString("direccion"),
+                        rs.getDate("fecha_nacimiento"),
+                        rs.getString("genero"),
+                        rs.getString("padecimiento")
+                );
+            }
+
+            rs.close();
+            ps.close();
+            con.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return cliente;
     }
 
 }
+
+
