@@ -16,10 +16,16 @@ public class Cliente extends Persona {
     }
 
     public String getPadecimiento() {
-        return padecimiento;
+        return this.padecimiento;
     }
 
     public void setPadecimiento(String padecimiento) {
         this.padecimiento = padecimiento;
     }
+
+    public String toString() {
+        int var10000 = this.getId();
+        return "Cliente{id=" + var10000 + ", nombreCompleto='" + this.getNombreCompleto() + "', cedula='" + this.getCedula() + "', correo='" + this.getCorreo() + "', telefono=" + this.getTelefono() + ", direccion='" + this.getDireccion() + "', fechaNacimiento=" + String.valueOf(this.getFechaNacimiento()) + ", genero='" + this.getGenero() + "', padecimiento='" + this.padecimiento + "'}";
+    }
 }
+

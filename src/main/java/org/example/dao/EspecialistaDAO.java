@@ -9,89 +9,80 @@ import java.util.List;
 
 public class EspecialistaDAO {
 
-    public void insertarEspecialista(Especialista itemEspecialista) {
+    public boolean insertarEspecialista(Especialista itemEspecialista) {
         String sql = "INSERT INTO grupokm_especialista (nombre_completo, cedula, correo, telefono, direccion, fecha_nacimiento, genero, especialidad) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
 
         try {
             Connection con = Conexion.getConnection();
-            PreparedStatement ps = con.prepareStatement(sql); {
-                ps.setString(1, itemEspecialista.getNombreCompleto());
-                ps.setString(2, itemEspecialista.getCedula());
-                ps.setString(3, itemEspecialista.getCorreo());
-                ps.setInt(4, itemEspecialista.getTelefono());
-                ps.setString(5, itemEspecialista.getDireccion());
-                ps.setDate(6, new java.sql.Date(itemEspecialista.getFechaNacimiento().getTime()));
-                ps.setString(7, itemEspecialista.getGenero());
-                ps.setString(8, itemEspecialista.getEspecialidad());
-            }
-            ps.executeUpdate();
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setString(1, itemEspecialista.getNombreCompleto());
+            ps.setString(2, itemEspecialista.getCedula());
+            ps.setString(3, itemEspecialista.getCorreo());
+            ps.setInt(4, itemEspecialista.getTelefono());
+            ps.setString(5, itemEspecialista.getDireccion());
+            ps.setDate(6, new Date(itemEspecialista.getFechaNacimiento().getTime()));
+            ps.setString(7, itemEspecialista.getGenero());
+            ps.setString(8, itemEspecialista.getEspecialidad());
+            return ps.executeUpdate() > 0;
         } catch (SQLException e) {
             e.printStackTrace();
+            return false;
         }
     }
 
-    public void actualizarEspecialista(Especialista itemEspecialista) {
+    public boolean actualizarEspecialista(Especialista itemEspecialista) {
         String sql = "UPDATE grupokm_especialista SET nombre_completo = ?, cedula = ?, correo = ?, telefono = ?, direccion = ?, fecha_nacimiento = ?, genero = ?, especialidad = ? WHERE id = ?";
 
         try {
             Connection con = Conexion.getConnection();
-            PreparedStatement ps = con.prepareStatement(sql); {
-                ps.setString(1, itemEspecialista.getNombreCompleto());
-                ps.setString(2, itemEspecialista.getCedula());
-                ps.setString(3, itemEspecialista.getCorreo());
-                ps.setInt(4, itemEspecialista.getTelefono());
-                ps.setString(5, itemEspecialista.getDireccion());
-                ps.setDate(6, new java.sql.Date(itemEspecialista.getFechaNacimiento().getTime()));
-                ps.setString(7, itemEspecialista.getGenero());
-                ps.setString(8, itemEspecialista.getEspecialidad());
-                ps.setInt(9, itemEspecialista.getId());
-            }
-            ps.executeUpdate();
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setString(1, itemEspecialista.getNombreCompleto());
+            ps.setString(2, itemEspecialista.getCedula());
+            ps.setString(3, itemEspecialista.getCorreo());
+            ps.setInt(4, itemEspecialista.getTelefono());
+            ps.setString(5, itemEspecialista.getDireccion());
+            ps.setDate(6, new Date(itemEspecialista.getFechaNacimiento().getTime()));
+            ps.setString(7, itemEspecialista.getGenero());
+            ps.setString(8, itemEspecialista.getEspecialidad());
+            ps.setInt(9, itemEspecialista.getId());
+            return ps.executeUpdate() > 0;
         } catch (SQLException e) {
             e.printStackTrace();
+            return false;
         }
     }
 
-    public void eliminarEspecialista(int id) {
+    public boolean eliminarEspecialista(int id) {
         String sql = "DELETE FROM grupokm_especialista WHERE id = ?";
 
         try {
             Connection con = Conexion.getConnection();
-            PreparedStatement ps = con.prepareStatement(sql); {
-                ps.setInt(1, id);
-            }
-            ps.executeUpdate();
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setInt(1, id);
+            return ps.executeUpdate() > 0;
         } catch (SQLException e) {
             e.printStackTrace();
+            return false;
         }
     }
 
     public List<Especialista> obtenerEspecialistas() {
-        List<Especialista> especialistas = new ArrayList<>();
-
+        List<Especialista> especialistas = new ArrayList();
         String sql = "SELECT * FROM grupokm_especialista";
 
         try {
             Connection con = Conexion.getConnection();
             Statement st = con.createStatement();
             ResultSet rs = st.executeQuery(sql);
-            while (rs.next()) {
-                Especialista item = new Especialista(
-                        rs.getInt("id"),
-                        rs.getString("nombre_completo"),
-                        rs.getString("cedula"),
-                        rs.getString("correo"),
-                        rs.getInt("telefono"),
-                        rs.getString("direccion"),
-                        rs.getDate("fecha_nacimiento"),
-                        rs.getString("genero"),
-                        rs.getString("especialidad")
-                );
+
+            while(rs.next()) {
+                Especialista item = new Especialista(rs.getInt("id"), rs.getString("nombre_completo"), rs.getString("cedula"), rs.getString("correo"), rs.getInt("telefono"), rs.getString("direccion"), rs.getDate("fecha_nacimiento"), rs.getString("genero"), rs.getString("especialidad"));
                 especialistas.add(item);
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
+
         return especialistas;
     }
 
@@ -104,19 +95,8 @@ public class EspecialistaDAO {
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setInt(1, id);
             ResultSet rs = ps.executeQuery();
-
             if (rs.next()) {
-                especialista = new Especialista(
-                        rs.getInt("id"),
-                        rs.getString("nombre_completo"),
-                        rs.getString("cedula"),
-                        rs.getString("correo"),
-                        rs.getInt("telefono"),
-                        rs.getString("direccion"),
-                        rs.getDate("fecha_nacimiento"),
-                        rs.getString("genero"),
-                        rs.getString("especialidad")
-                );
+                especialista = new Especialista(rs.getInt("id"), rs.getString("nombre_completo"), rs.getString("cedula"), rs.getString("correo"), rs.getInt("telefono"), rs.getString("direccion"), rs.getDate("fecha_nacimiento"), rs.getString("genero"), rs.getString("especialidad"));
             }
 
             rs.close();
@@ -138,19 +118,8 @@ public class EspecialistaDAO {
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setString(1, cedula);
             ResultSet rs = ps.executeQuery();
-
             if (rs.next()) {
-                especialista = new Especialista(
-                        rs.getInt("id"),
-                        rs.getString("nombre_completo"),
-                        rs.getString("cedula"),
-                        rs.getString("correo"),
-                        rs.getInt("telefono"),
-                        rs.getString("direccion"),
-                        rs.getDate("fecha_nacimiento"),
-                        rs.getString("genero"),
-                        rs.getString("especialidad")
-                );
+                especialista = new Especialista(rs.getInt("id"), rs.getString("nombre_completo"), rs.getString("cedula"), rs.getString("correo"), rs.getInt("telefono"), rs.getString("direccion"), rs.getDate("fecha_nacimiento"), rs.getString("genero"), rs.getString("especialidad"));
             }
 
             rs.close();
@@ -172,19 +141,8 @@ public class EspecialistaDAO {
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setString(1, "%" + nombreCompleto + "%");
             ResultSet rs = ps.executeQuery();
-
             if (rs.next()) {
-                especialista = new Especialista(
-                        rs.getInt("id"),
-                        rs.getString("nombre_completo"),
-                        rs.getString("cedula"),
-                        rs.getString("correo"),
-                        rs.getInt("telefono"),
-                        rs.getString("direccion"),
-                        rs.getDate("fecha_nacimiento"),
-                        rs.getString("genero"),
-                        rs.getString("especialidad")
-                );
+                especialista = new Especialista(rs.getInt("id"), rs.getString("nombre_completo"), rs.getString("cedula"), rs.getString("correo"), rs.getInt("telefono"), rs.getString("direccion"), rs.getDate("fecha_nacimiento"), rs.getString("genero"), rs.getString("especialidad"));
             }
 
             rs.close();

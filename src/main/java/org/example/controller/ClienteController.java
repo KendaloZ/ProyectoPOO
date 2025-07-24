@@ -6,35 +6,34 @@ import org.example.dao.ClienteDAO;
 import java.util.List;
 
 public class ClienteController {
-
     private ClienteDAO clienteDAO = new ClienteDAO();
 
-    public void insertarCliente(Cliente itemCliente){
-        clienteDAO.insertarCliente(itemCliente);
+    public boolean insertarCliente(Cliente itemCliente) {
+        return this.clienteDAO.insertarCliente(itemCliente);
     }
 
-    public void actualizarCliente(Cliente itemCliente){
-        clienteDAO.actualizarCliente(itemCliente);
+    public boolean actualizarCliente(Cliente itemCliente) {
+        return this.clienteDAO.actualizarCliente(itemCliente);
     }
 
-    public void eliminarCliente(int id){
-        clienteDAO.eliminarCliente(id);
+    public boolean eliminarCliente(int id) {
+        return this.clienteDAO.eliminarCliente(id);
     }
 
-    public List<Cliente> obtenerClientes(){
-        return clienteDAO.obtenerclientes();
+    public List<Cliente> obtenerClientes() {
+        return this.clienteDAO.obtenerclientes();
     }
 
-    public Cliente obtenerClienteXID(int id){
-        return clienteDAO.obtenerClienteXID(id);
+    public Cliente obtenerClienteXID(int id) {
+        return this.clienteDAO.obtenerClienteXID(id);
     }
 
-    public Cliente obtenerClienteXCedula(String cedula){
-        return clienteDAO.obtenerClienteXCedula(cedula);
+    public Cliente obtenerClienteXCedula(String cedula) {
+        return this.clienteDAO.obtenerClienteXCedula(cedula);
     }
 
-    public Cliente obtenerClienteXNombre(String nombreCompleto){
-        return clienteDAO.obtenerClienteXNombre(nombreCompleto);
+    public Cliente obtenerClienteXNombre(String nombreCompleto) {
+        return this.clienteDAO.obtenerClienteXNombre(nombreCompleto);
     }
-
 }
+

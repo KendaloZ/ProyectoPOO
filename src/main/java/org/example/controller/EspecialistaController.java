@@ -8,31 +8,32 @@ import java.util.List;
 public class EspecialistaController {
     private EspecialistaDAO especialistaDAO = new EspecialistaDAO();
 
-    public void insertarEspecialista(Especialista itemEspecialista){
-        especialistaDAO.insertarEspecialista(itemEspecialista);
+    public boolean insertarEspecialista(Especialista itemEspecialista) {
+        return this.especialistaDAO.insertarEspecialista(itemEspecialista);
     }
 
-    public void actualizarEspecialista(Especialista itemEspecialista){
-        especialistaDAO.actualizarEspecialista(itemEspecialista);
+    public boolean actualizarEspecialista(Especialista itemEspecialista) {
+        return this.especialistaDAO.actualizarEspecialista(itemEspecialista);
     }
 
-    public void eliminarEspecialista(int id){
-        especialistaDAO.eliminarEspecialista(id);
+    public boolean eliminarEspecialista(int id) {
+        return this.especialistaDAO.eliminarEspecialista(id);
     }
 
-    public List<Especialista> obtenerEspecialistas(){
-        return especialistaDAO.obtenerEspecialistas();
+    public List<Especialista> obtenerEspecialistas() {
+        return this.especialistaDAO.obtenerEspecialistas();
     }
 
-    public Especialista obtenerEspecialistaXID(int id){
-        return especialistaDAO.obtenerEspecialistaXID(id);
+    public Especialista obtenerEspecialistaXID(int id) {
+        return this.especialistaDAO.obtenerEspecialistaXID(id);
     }
 
-    public Especialista obtenerEspecialistaXCedula(String cedula){
-        return especialistaDAO.obtenerEspecialistaXCedula(cedula);
+    public Especialista obtenerEspecialistaXCedula(String cedula) {
+        return this.especialistaDAO.obtenerEspecialistaXCedula(cedula);
     }
 
-    public Especialista obtenerEspecialistaXNombre(String nombre){
-        return especialistaDAO.obtenerEspecialistaXNombre(nombre);
+    public Especialista obtenerEspecialistaXNombre(String nombre) {
+        return this.especialistaDAO.obtenerEspecialistaXNombre(nombre);
     }
 }
+

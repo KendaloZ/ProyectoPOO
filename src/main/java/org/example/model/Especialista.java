@@ -16,10 +16,15 @@ public class Especialista extends Persona {
     }
 
     public String getEspecialidad() {
-        return especialidad;
+        return this.especialidad;
     }
 
     public void setEspecialidad(String especialidad) {
         this.especialidad = especialidad;
+    }
+
+    public String toString() {
+        int var10000 = this.getId();
+        return "Especialista{id=" + var10000 + ", nombreCompleto='" + this.getNombreCompleto() + "', cedula='" + this.getCedula() + "', correo='" + this.getCorreo() + "', telefono=" + this.getTelefono() + ", direccion='" + this.getDireccion() + "', fechaNacimiento=" + String.valueOf(this.getFechaNacimiento()) + ", genero='" + this.getGenero() + "', especialidad='" + this.especialidad + "'}";
     }
 }
