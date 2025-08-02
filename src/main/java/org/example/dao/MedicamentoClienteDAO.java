@@ -42,14 +42,15 @@ public class MedicamentoClienteDAO {
         }
     }
 
-    public void desasociarMedicamentoCliente(int id) {
-        String sql = "DELETE FROM grupokm_cliente_medicamento WHERE id = ?";
+    public boolean desasociarMedicamentoCliente(int idCliente, int idMedicamento) {
+        String sql = "DELETE FROM grupokm_cliente_medicamento WHERE id_cliente = ? AND id_medicamento = ?";
 
         try {
             Connection con = Conexion.getConnection();
             PreparedStatement ps = con.prepareStatement(sql);
-            ps.setInt(1, id);
-            ps.executeUpdate();
+            ps.setInt(1, idCliente);
+            ps.setInt(2,idMedicamento);
+            return ps.executeUpdate() >0;
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -57,7 +58,7 @@ public class MedicamentoClienteDAO {
 
     public List<Medicamento> obtenerMedicamentosClientes(int idCliente) {
         List<Medicamento> medicamentos = new ArrayList();
-        String sql = "SELECT c.id_medicamento, m.nombre FROM grupokm_cliente_medicamento c INNER JOIN grupokm_medicamento m ON m.id_medicamento = c.id_medicamento WHERE c.id_cliente = ?";
+        String sql = "SELECT c.id_medicamento, m.nombre FROM grupokm_cliente_medicamento c INNER JOIN grupokm_medicamento m ON m.id = c.id_medicamento WHERE c.id_cliente = ?";
 
         try {
             try (

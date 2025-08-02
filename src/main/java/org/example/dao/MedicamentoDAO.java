@@ -116,4 +116,27 @@ public class MedicamentoDAO {
             return false;
         }
     }
+
+    public Medicamento obtenerMedicamentoPorNombre(String nombre) {
+        String sql = "SELECT * FROM grupokm_medicamento WHERE LOWER(nombre) LIKE LOWER(?)";
+        Medicamento medicamento = null;
+
+        try {
+            Connection con = Conexion.getConnection();
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setString(1, "%" + nombre + "%");
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()){
+                medicamento = new Medicamento(rs.getInt("id"),rs.getString("nombre"), rs.getBoolean("disponible"));
+            }
+
+            rs.close();
+            ps.close();
+            con.close();
+        }catch(SQLException e){
+            e.printStackTrace();
+        }
+
+        return medicamento;
+    }
 }

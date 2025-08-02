@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+
+<BorderPane xmlns:fx="http://javafx.com/fxml"
+            fx:controller="org.example.view.ClienteViewController">
+
+    <center>
+        <GridPane hgap="10" vgap="10">
+            <padding>
+                <Insets top="20" right="20" bottom="20" left="20"/>
+            </padding>
+
+            <Label text="Nombre completo:" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
+            <TextField fx:id="nombreField" GridPane.rowIndex="0" GridPane.columnIndex="1"/>
+
+            <Label text="Cédula:" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
+            <TextField fx:id="cedulaField" GridPane.rowIndex="1" GridPane.columnIndex="1"/>
+
+            <Label text="Correo:" GridPane.rowIndex="2" GridPane.columnIndex="0"/>
+            <TextField fx:id="correoField" GridPane.rowIndex="2" GridPane.columnIndex="1"/>
+
+            <Label text="Teléfono:" GridPane.rowIndex="3" GridPane.columnIndex="0"/>
+            <TextField fx:id="telefonoField" GridPane.rowIndex="3" GridPane.columnIndex="1"/>
+
+            <Label text="Dirección:" GridPane.rowIndex="4" GridPane.columnIndex="0"/>
+            <TextField fx:id="direccionField" GridPane.rowIndex="4" GridPane.columnIndex="1"/>
+
+            <Label text="Fecha Nacimiento:" GridPane.rowIndex="5" GridPane.columnIndex="0"/>
+            <DatePicker fx:id="fechaNacimientoPicker" GridPane.rowIndex="5" GridPane.columnIndex="1"/>
+
+            <Label text="Género:" GridPane.rowIndex="6" GridPane.columnIndex="0"/>
+            <ComboBox fx:id="generoCombo" GridPane.rowIndex="6" GridPane.columnIndex="1"/>
+
+            <HBox spacing="10" GridPane.rowIndex="7" GridPane.columnIndex="0" GridPane.columnSpan="2">
+                <Button text="Guardar"   onAction="#guardarCliente"/>
+                <Button text="Actualizar" onAction="#actualizarCliente" fx:id="actualizarBtn" disable="true"/>
+                <Button text="Eliminar"   onAction="#eliminarCliente"   fx:id="eliminarBtn"   disable="true"/>
+                <Button text="Limpiar"    onAction="#limpiarFormulario"/>
+            </HBox>
+
+            <TableView fx:id="tablaClientes" GridPane.rowIndex="8" GridPane.columnIndex="0" GridPane.columnSpan="2" prefHeight="250">
+                <columns>
+                    <TableColumn fx:id="colId"            text="ID"           prefWidth="50"/>
+                    <TableColumn fx:id="colNombre"        text="Nombre"       prefWidth="150"/>
+                    <TableColumn fx:id="colCedula"        text="Cédula"       prefWidth="120"/>
+                    <TableColumn fx:id="colCorreo"        text="Correo"       prefWidth="150"/>
+                    <TableColumn fx:id="colTelefono"      text="Teléfono"     prefWidth="100"/>
+                    <TableColumn fx:id="colDireccion"     text="Dirección"    prefWidth="150"/>
+                    <TableColumn fx:id="colFechaNac"      text="Nacimiento"   prefWidth="110"/>
+                    <TableColumn fx:id="colGenero"        text="Género"       prefWidth="90"/>
+                </columns>
+            </TableView>
+        </GridPane>
+    </center>
+</BorderPane>

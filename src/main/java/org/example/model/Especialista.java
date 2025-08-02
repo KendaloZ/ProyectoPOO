@@ -1,6 +1,6 @@
 package org.example.model;
 
-import java.util.Date;
+import java.sql.Date;
 
 public class Especialista extends Persona {
     private String especialidad;
@@ -13,6 +13,10 @@ public class Especialista extends Persona {
     public Especialista(String nombreCompleto, String cedula, String correo, int telefono, String direccion, Date fechaNacimiento, String genero, String especialidad) {
         super(nombreCompleto, cedula, correo, telefono, direccion, fechaNacimiento, genero);
         this.especialidad = especialidad;
+    }
+
+    public Especialista(){
+        super();
     }
 
     public String getEspecialidad() {

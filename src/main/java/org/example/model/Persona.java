@@ -1,6 +1,6 @@
 package org.example.model;
 
-import java.util.Date;
+import java.sql.Date;
 
 public class Persona {
     private int id;
@@ -31,6 +31,10 @@ public class Persona {
         this.direccion = direccion;
         this.fechaNacimiento = fechaNacimiento;
         this.genero = genero;
+    }
+
+    public Persona() {
+
     }
 
     public int getId() {

@@ -27,4 +27,8 @@ public class MedicamentoController {
     public boolean eliminarMedicamento(int id) {
         return this.medicamentoDAO.eliminarMedicamento(id);
     }
+
+    public  Medicamento obtenerMedicamentoXNombre(String nombre) {
+        return  this.medicamentoDAO.obtenerMedicamentoPorNombre(nombre);
+    }
 }

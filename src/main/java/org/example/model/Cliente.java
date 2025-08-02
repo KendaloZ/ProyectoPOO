@@ -1,6 +1,8 @@
 package org.example.model;
 
-import java.util.Date;
+
+import java.sql.Date;
+
 
 public class Cliente extends Persona {
     private String padecimiento;
@@ -13,6 +15,10 @@ public class Cliente extends Persona {
     public Cliente(String nombreCompleto, String cedula, String correo, int telefono, String direccion, Date fechaNacimiento, String genero, String padecimiento) {
         super(nombreCompleto, cedula, correo, telefono, direccion, fechaNacimiento, genero);
         this.padecimiento = padecimiento;
+    }
+
+    public Cliente() {
+        super();
     }
 
     public String getPadecimiento() {

@@ -19,7 +19,9 @@ public class Medicamento {
         this.disponible = disponible;
     }
 
-    public Medicamento(int idMedicamento, String nombre) {
+    public Medicamento(int id, String nombre) {
+        this.id = id;
+        this.nombre = nombre;
     }
 
     public int getId() {

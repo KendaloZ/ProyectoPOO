@@ -1,6 +1,9 @@
 package org.example.controller;
 
 import org.example.dao.MedicamentoClienteDAO;
+import org.example.model.Medicamento;
+
+import java.util.List;
 
 
 public class MedicamentoClienteController {
@@ -14,11 +17,11 @@ public class MedicamentoClienteController {
         this.medicamentoClienteDAO.editarMedicamentoCliente(idCliente, idMedicamento, id);
     }
 
-    public void borrarMedicamentoCliente(int idCliente) {
-        this.medicamentoClienteDAO.desasociarMedicamentoCliente(idCliente);
+    public boolean borrarMedicamentoCliente(int idCliente, int idMedicamento) {
+        return this.medicamentoClienteDAO.desasociarMedicamentoCliente(idCliente, idMedicamento);
     }
 
-    public void obtenerMedicamentosClientes(int idMedicamento) {
-        this.medicamentoClienteDAO.obtenerMedicamentosClientes(idMedicamento);
+    public List<Medicamento> obtenerMedicamentosClientes(int idCliente) {
+        return this.medicamentoClienteDAO.obtenerMedicamentosClientes(idCliente);
     }
 }
